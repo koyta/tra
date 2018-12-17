@@ -57,6 +57,8 @@ const StyledFileInputLabel = styled.label`
 
 class InputComponent extends PureComponent {
   handleChange = e => {
+    e.preventDefault();
+
     if (typeof this.props.onChange !== "function") {
       return;
     }
