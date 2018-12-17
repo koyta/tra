@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "global": "^4.3.2",
+    "lerna": "^3.6.0"
+  },
+  "name": "lerna",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "app": "yarn run lerna run start"
+  }
+}

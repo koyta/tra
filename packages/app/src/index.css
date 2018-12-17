@@ -1,0 +1,49 @@
+@font-face {
+  font-family: "LabGrotesque";
+  font-weight: 300;
+  src: local("LabGrotesque-Light"),
+    url(./assets/fonts/labgrotesque/LabGrotesque-Light.eot)
+      format("embedded-opentype"),
+    url(./assets/fonts/labgrotesque/LabGrotesque-Light.woff2) format("woff2"),
+    url(./assets/fonts/labgrotesque/LabGrotesque-Light.woff) format("woff");
+}
+
+@font-face {
+  font-family: "LabGrotesque";
+  font-weight: 400;
+  src: local("LabGrotesque-Regular"),
+    url(./assets/fonts/labgrotesque/LabGrotesque-Regular.woff) format("woff");
+}
+
+html,
+body,
+.root {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: "LabGrotesque", -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+input,
+textarea,
+select {
+  font-family: "LabGrotesque", -apple-system, "Segoe UI", sans-serif;
+  font-weight: 300;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dt {
+  font-family: "LabGrotesque", -apple-system, "Segoe UI", sans-serif;
+  font-weight: 400;
+}
