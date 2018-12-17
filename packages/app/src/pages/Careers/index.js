@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withFormik, FastField } from "formik";
+import { withFormik, FastField, ErrorMessage } from "formik";
 import { AsYouType, isValidNumber } from "libphonenumber-js";
 import * as Yup from "yup";
 
@@ -45,11 +45,11 @@ class Careers extends Component {
     const { value } = e.target;
     const f = new AsYouType().input(value);
     this.props.setFieldValue("phone", f);
-    this.handlePhoneValidate(f);
+    this.handlePhoneValidate(f); //bug there, validation doenst set error on errors.phone
   };
 
   handlePhoneValidate = value => {
-    let error = "";
+    let error;
 
     if (!isValidNumber(value)) {
       error = "Invalid phone number";
@@ -140,6 +140,13 @@ class Careers extends Component {
           <FormInputContainer style={{ marginTop: 32 }}>
             <Button type="submit" label="Send" />
           </FormInputContainer>
+          <ul>
+            {Object.keys(this.props.errors).map(key => (
+              <li>
+                <ErrorMessage name={key} />
+              </li>
+            ))}
+          </ul>
         </Form>
       </React.Fragment>
     );
@@ -157,10 +164,10 @@ const CVForm = {
     file: ""
   }),
   validateOnBlur: false,
+  validateOnChange: false,
   validationSchema: Yup.object().shape({
     name: Yup.string().required(),
     lastname: Yup.string().required(),
-    phone: Yup.string().required(),
     comment: Yup.string().notRequired(),
     position: Yup.object().required(),
     link: Yup.string()
