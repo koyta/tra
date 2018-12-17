@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import { withFormik, FastField } from "formik";
-import {
-  AsYouType,
-  isValidNumber,
-  parseIncompletePhoneNumber
-} from "libphonenumber-js";
+import { AsYouType, isValidNumber } from "libphonenumber-js";
 import * as Yup from "yup";
 
 import H2 from "../../components/common/H2";
@@ -53,11 +49,10 @@ class Careers extends Component {
   };
 
   handlePhoneValidate = value => {
-    console.log("Triggered validation");
     let error = "";
 
     if (!isValidNumber(value)) {
-      error = "Invalid number phone";
+      error = "Invalid phone number";
     }
 
     this.props.setFieldError("phone", error);
@@ -71,10 +66,12 @@ class Careers extends Component {
   render() {
     return (
       <React.Fragment>
-        <H2 style={{ marginTop: 110 }}>Careers. Send us your CV</H2>
+        <H2 style={{ marginTop: 110, marginBottom: 0 }}>
+          Careers. Send us your CV
+        </H2>
 
         <Form onSubmit={this.props.handleSubmit}>
-          <FormSelectContainer>
+          <FormSelectContainer style={{ marginTop: 40, marginBottom: 36 }}>
             <Select
               options={positionData}
               optionToString={positionToString}
@@ -133,7 +130,11 @@ class Careers extends Component {
             <Input
               type="file"
               onChange={this.handleFileInputChange}
-              label="Upload CV file"
+              label={
+                this.props.values.file
+                  ? this.props.values.file.name
+                  : "Upload CV file"
+              }
             />
           </FormFileInputContainer>
           <FormInputContainer style={{ marginTop: 32 }}>
