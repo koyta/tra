@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent } from "react-testing-library";
 import { MemoryRouter } from "react-router-dom";
-import Burger, { MenuButton } from "./Burger";
+import Burger, { MenuButton } from "../Burger";
 
 function renderWithRouter(children) {
   return render(<MemoryRouter>{children}</MemoryRouter>);

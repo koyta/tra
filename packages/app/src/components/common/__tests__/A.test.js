@@ -1,7 +1,7 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import { MemoryRouter } from "react-router-dom";
-import A from "./A";
+import A from "../A";
 
 function renderRouterLink(url) {
   return (
