@@ -1,0 +1,1 @@
+app: cd packages/app && yarn start
