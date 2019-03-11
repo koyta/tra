@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Transition, animated } from "react-spring/renderprops";
 import { Link } from "react-router-dom";
 import { grayColor, blackColor } from "../../constants/styled-variables";
 import Img from "./Img";
@@ -11,8 +12,8 @@ const Container = styled.div`
   position: relative;
 `;
 
-const MenuButton = styled.button.attrs({
-  type: "button"
+export const MenuButton = styled.button.attrs({
+  type: "button",
 })`
   border: 0;
   box-shadow: none;
@@ -43,13 +44,9 @@ const MenuList = styled.ul`
   position: absolute;
   top: 100%;
   right: 0;
-
-  transform: translateY(${props => (props.isOpen ? 0 : -10)}px);
-  opacity: ${props => (props.isOpen ? 1 : 0)};
-  visibility: ${props => (props.isOpen ? "visible" : "hidden")};
-
-  transition: transform 0.3s, opacity 0.3s;
 `;
+
+const AnimatedMenuList = animated(MenuList);
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -69,23 +66,17 @@ const StyledLink = styled(Link)`
   transition: color 0.3s, opacity 0.3s;
 `;
 
-export default class Burger extends React.PureComponent {
+const springFrom = { opacity: 0, y: -10 };
+const springTo = { opacity: 1, y: 0 };
+
+class Burger extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false
+      isOpen: false,
     };
-
     this.node = React.createRef();
   }
-
-  componentDidMount = () => {
-    document.addEventListener("mousedown", this.handleMenuClick, false);
-  };
-
-  componentWillUnmount = () => {
-    document.removeEventListener("mousedown", this.handleMenuClick, false);
-  };
 
   handleMenuClick = e => {
     if (this.node.current.contains(e.target)) {
@@ -98,25 +89,47 @@ export default class Burger extends React.PureComponent {
   };
 
   render() {
+    const { isOpen } = this.state;
     return (
       <div ref={this.node}>
         <Container>
-          <MenuButton>
+          <MenuButton onClick={this.handleMenuClick} data-testid="burger-btn">
             <Img src={BurgerImg} />
           </MenuButton>
-          <MenuList isOpen={this.state.isOpen}>
-            <li>
-              <StyledLink to="/main">Main</StyledLink>
-            </li>
-            <li>
-              <StyledLink to="/">Careers</StyledLink>
-            </li>
-            <li>
-              <StyledLink to="/offices">Offices</StyledLink>
-            </li>
-          </MenuList>
+          <Transition
+            native={true}
+            items={isOpen}
+            from={springFrom}
+            enter={springTo}
+            leave={springFrom}
+          >
+            {isOpen =>
+              isOpen &&
+              (({ y, opacity }) => (
+                <AnimatedMenuList
+                  data-testid="burger-list"
+                  style={{
+                    transform: y.interpolate(y => `translateY(${y}px)`),
+                    opacity: opacity,
+                  }}
+                >
+                  <li>
+                    <StyledLink to="/main">Main</StyledLink>
+                  </li>
+                  <li>
+                    <StyledLink to="/">Careers</StyledLink>
+                  </li>
+                  <li>
+                    <StyledLink to="/offices">Offices</StyledLink>
+                  </li>
+                </AnimatedMenuList>
+              ))
+            }
+          </Transition>
         </Container>
       </div>
     );
   }
 }
+
+export default Burger;
