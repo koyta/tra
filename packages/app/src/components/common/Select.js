@@ -1,8 +1,9 @@
 import React, { PureComponent } from "react";
 import styled from "styled-components";
+import { transparentize } from "polished";
 
 import ArrowImg from "../../assets/images/small_arrow.svg";
-import { blackColor, grayColorRGBA } from "../../constants/styled-variables";
+import { blackColor, grayColor } from "../../constants/styled-variables";
 import Img from "./Img";
 
 const ArrowIcon = styled.div`
@@ -24,7 +25,8 @@ const Option = styled.li`
   font-weight: 300;
   line-height: 36px;
   letter-spacing: 0.2px;
-  color: ${grayColorRGBA(0.3)};
+  color: ${props =>
+    props.selected ? blackColor : transparentize(0.7, grayColor)};
 
   transition: 0.3s;
 
@@ -49,7 +51,7 @@ const Container = styled.ul`
   align-items: flex-start;
 
   border-radius: 20px;
-  border: 1px solid ${grayColorRGBA(0.3)};
+  border: 1px solid ${transparentize(0.7, grayColor)};
   background-color: white;
 
   & > ${ArrowIcon} {
@@ -74,8 +76,10 @@ class Select extends PureComponent {
     super(props);
 
     this.state = {
-      isOpen: false
+      isOpen: false,
     };
+
+    this.node = React.createRef();
   }
 
   /**
@@ -94,9 +98,10 @@ class Select extends PureComponent {
     if (this.state.isOpen) {
       this.setState({ isOpen: false });
       this.props.onSelect(null);
+    } else {
+      this.setState({ isOpen: true });
     }
-
-    this.setState({ isOpen: true });
+    this.node.current.blur();
   };
 
   render() {
@@ -108,7 +113,7 @@ class Select extends PureComponent {
       optionToKey,
       options,
       selected,
-      placeholder
+      placeholder,
     } = this.props;
 
     return (
@@ -116,7 +121,12 @@ class Select extends PureComponent {
         <ArrowIcon>
           <Img src={ArrowImg} />
         </ArrowIcon>
-        <Option tabIndex={0} onClick={this.handleReset}>
+        <Option
+          tabIndex={0}
+          onClick={this.handleReset}
+          ref={this.node}
+          selected={selected}
+        >
           {selected
             ? !isOpen
               ? optionToString(selected)
