@@ -17,17 +17,17 @@ import FormTextareaContainer from "./FormTextareaContainer";
 // ======== Start of mocks ========
 const positionData = [
   {
-    value: "Senior C++ Developer"
+    value: "Senior C++ Developer",
   },
   {
-    value: "Computer Vision Lead"
+    value: "Computer Vision Lead",
   },
   {
-    value: "Java/Scala Developer"
+    value: "Java/Scala Developer",
   },
   {
-    value: "Recruiter"
-  }
+    value: "Recruiter",
+  },
 ];
 
 function positionToString(option) {
@@ -142,7 +142,7 @@ class Careers extends Component {
           </FormInputContainer>
           <ul>
             {Object.keys(this.props.errors).map(key => (
-              <li>
+              <li key={key}>
                 <ErrorMessage name={key} />
               </li>
             ))}
@@ -161,7 +161,7 @@ const CVForm = {
     position: null,
     link: "",
     comment: "",
-    file: ""
+    file: "",
   }),
   validateOnBlur: false,
   validateOnChange: false,
@@ -176,7 +176,7 @@ const CVForm = {
       .required("Link to CV is required"),
     file: Yup.mixed()
       .nullable()
-      .required()
+      .required(),
   }),
   handleSubmit: (values, formikBag) => {
     const formData = new FormData();
@@ -189,7 +189,7 @@ const CVForm = {
       console.log(`${pair[0]}: ${pair[1]}`);
     }
     console.groupEnd("Form Data");
-  }
+  },
 };
 
 export default withFormik(CVForm)(Careers);

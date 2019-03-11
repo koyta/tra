@@ -12,6 +12,7 @@
     "packages/*"
   ],
   "scripts": {
-    "app": "yarn run lerna run start"
+    "app": "cd packages/app && yarn start",
+    "app:test": "cd packages/app && yarn test"
   }
 }
