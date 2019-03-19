@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Transition, animated } from "react-spring/renderprops";
 import { Link } from "react-router-dom";
 import { grayColor, blackColor } from "../../constants/styled-variables";
-import Img from "./Img";
+import Img from "ui/components/Img";
 import BurgerImg from "../../assets/images/burger.svg";
 
 const Container = styled.div`

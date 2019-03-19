@@ -3,16 +3,18 @@ import { withFormik, FastField, ErrorMessage } from "formik";
 import { AsYouType, isValidNumber } from "libphonenumber-js";
 import * as Yup from "yup";
 
-import H2 from "../../components/common/H2";
-import Input from "../../components/common/Input";
-import Textarea from "../../components/common/Textarea";
-import Button from "../../components/common/Button";
-import Select from "../../components/common/Select";
-import Form from "./Form";
-import FormInputContainer from "./FormInputContainer";
-import FormFileInputContainer from "./FormFileInputContainer";
-import FormSelectContainer from "./FormSelectContainer";
-import FormTextareaContainer from "./FormTextareaContainer";
+import Heading from "ui/components/Heading";
+import Input from "ui/components/Input";
+import Textarea from "ui/components/Textarea";
+import Button from "ui/components/Button";
+import Select from "ui/components/Select";
+import {
+  Form,
+  FormFileInputContainer,
+  FormInputContainer,
+  FormSelectContainer,
+  FormTextareaContainer,
+} from "./styled";
 
 // ======== Start of mocks ========
 const positionData = [
@@ -66,9 +68,9 @@ class Careers extends Component {
   render() {
     return (
       <React.Fragment>
-        <H2 style={{ marginTop: 110, marginBottom: 0 }}>
+        <Heading style={{ marginTop: 110, marginBottom: 0 }}>
           Careers. Send us your CV
-        </H2>
+        </Heading>
 
         <Form onSubmit={this.props.handleSubmit}>
           <FormSelectContainer style={{ marginTop: 40, marginBottom: 36 }}>

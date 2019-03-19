@@ -1,7 +1,7 @@
 import React from "react";
 import FooterContainer from "./FooterContainer";
-import P from "../common/P";
-import A from "../common/A";
+import P from "ui/components/P";
+import A from "ui/components/A";
 
 export default function Footer() {
   return (

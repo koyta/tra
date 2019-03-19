@@ -9,10 +9,12 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/app",
+    "packages/ui"
   ],
   "scripts": {
     "app": "cd packages/app && yarn start",
-    "app:test": "cd packages/app && yarn test"
+    "app:test": "cd packages/app && yarn test",
+    "storybook": "cd packages/ui && yarn start"
   }
 }
